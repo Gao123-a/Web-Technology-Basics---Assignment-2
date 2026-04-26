@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Gallop Motors</title>
+    <style>
+         :root {
+            --primary: #1a1a2e;
+            --accent: #c9a96e;
+            --accent-hover: #b8944f;
+            --dark: #0d0d1a;
+            --light: #f5f5f0;
+            --white: #ffffff;
+            --gray: #6b7280;
+            --gray-light: #e5e7eb;
+            --danger: #e74c3c;
+            --success: #2ecc71;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
+            --radius: 12px;
+            --radius-lg: 20px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        /* Navbar */
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 16px 0;
+            background: rgba(13, 13, 26, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .navbar-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            background: var(--accent);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        /* Form Container */
+        
+        .login-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 20px 60px;
+        }
+        
+        .login-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 450px;
+            padding: 45px 40px;
+        }
+        
+        .card-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        
+        .card-header h2 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        .card-header p {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+        /* Form Groups */
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--gray-light);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: var(--transition);
+            background: #fafafa;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(201, 169, 110, 0.1);
+        }
+        
+        .error-message {
+            color: var(--danger);
+            font-size: 0.85rem;
+            margin-top: 10px;
+            text-align: center;
+            display: none;
+            padding: 10px;
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: 8px;
+        }
+        /* Button */
+        
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+        
+        .btn-submit:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(201, 169, 110, 0.3);
+        }
+        /* Footer Link */
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 25px;
+            color: var(--gray);
+        }
+        
+        .form-footer a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        /* Mobile */
+        
+        @media (max-width:768px) {
+            .login-card {
+                padding: 30px 24px;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🚗</div>
+                Gallop Motors
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="search.html">Search</a></li>
+                <li><a href="add-car.html">Add Car</a></li>
+                <li><a href="register.html">Register</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Login Form -->
+    <div class="login-container">
+        <div class="login-card">
+            <div class="card-header">
+                <h2>Welcome Back</h2>
+                <p>Log in to your account to continue</p>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="Enter your username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                </div>
+
+                <div id="loginError" class="error-message">
+                    Invalid username or password. Please try again.
+                </div>
+
+                <button type="submit" class="btn-submit">Sign In</button>
+            </form>
+
+            <div class="form-footer">
+                Don't have an account? <a href="register.html">Register here</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const errorMessage = document.getElementById('loginError');
+
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            // Default credentials check
+            if (username === 'user' && password === '123456') {
+                alert('Login successful! Welcome to Gallop Motors.');
+                window.location.href = 'index.html';
+            } else {
+                errorMessage.style.display = 'block';
+                passwordInput.value = ''; // Clear password field on error
+            }
+        });
+
+        // Hide error message when user starts typing again
+        usernameInput.addEventListener('input', () => errorMessage.style.display = 'none');
+        passwordInput.addEventListener('input', () => errorMessage.style.display = 'none');
+    </script>
+
+</body>
+
+</html>
