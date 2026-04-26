@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Registration - Chicheng Auto</title>
+    <style>
+         :root {
+            --primary: #1a1a2e;
+            --accent: #c9a96e;
+            --accent-hover: #b8944f;
+            --dark: #0d0d1a;
+            --light: #f5f5f0;
+            --white: #ffffff;
+            --gray: #6b7280;
+            --gray-light: #e5e7eb;
+            --danger: #e74c3c;
+            --success: #2ecc71;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
+            --radius: 12px;
+            --radius-lg: 20px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        /* Navbar */
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 16px 0;
+            background: rgba(13, 13, 26, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .navbar-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            background: var(--accent);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        /* Form Container */
+        
+        .register-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 20px 60px;
+        }
+        
+        .register-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 620px;
+            padding: 45px 40px;
+        }
+        
+        .card-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        
+        .card-header h2 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        .card-header p {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+        /* Form Groups */
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--gray-light);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: var(--transition);
+            background: #fafafa;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(201, 169, 110, 0.1);
+        }
+        
+        .form-hint {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 5px;
+        }
+        
+        .error-message {
+            color: var(--danger);
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+        /* Button */
+        
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+        
+        .btn-submit:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(201, 169, 110, 0.3);
+        }
+        /* Footer Link */
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 25px;
+            color: var(--gray);
+        }
+        
+        .form-footer a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        /* Mobile */
+        
+        @media (max-width:768px) {
+            .register-card {
+                padding: 30px 24px;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🚗</div>
+                Chicheng Auto
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="search.html">Search</a></li>
+                <li><a href="add-car.html">Add Car</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Seller Registration Form -->
+    <div class="register-container">
+        <div class="register-card">
+            <div class="card-header">
+                <h2>Seller Registration</h2>
+                <p>Verify your information to get a valid Seller User ID</p>
+            </div>
+
+            <form id="sellerRegisterForm">
+                <!-- a. Name: letters and spaces only -->
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter your full name">
+                    <div class="error-message" id="nameError">Only letters and spaces are allowed.</div>
+                </div>
+
+                <!-- b. Address: letters, numbers, spaces only -->
+                <div class="form-group">
+                    <label>Address</label>
+                    <input type="text" class="form-control" id="address" placeholder="Enter your full address">
+                    <div class="error-message" id="addressError">Only letters, numbers and spaces are allowed.</div>
+                </div>
+
+                <!-- c. Phone: Chinese phone number -->
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" class="form-control" id="phone" placeholder="Chinese phone number (11 digits)">
+                    <div class="error-message" id="phoneError">Please enter a valid Chinese phone number (11 digits).</div>
+                </div>
+
+                <!-- d. Email: must have @, end with .com or .cn -->
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" class="form-control" id="email" placeholder="example@domain.com or example@domain.cn">
+                    <div class="error-message" id="emailError">Email must contain one @ and end with .com or .cn.</div>
+                </div>
+
+                <!-- e. Username: min 6 alphanumeric -->
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="At least 6 alphanumeric characters">
+                    <div class="error-message" id="usernameError">Username must be at least 6 alphanumeric characters.</div>
+                </div>
+
+                <!-- f. Password: min 6 alphanumeric -->
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="At least 6 alphanumeric characters">
+                    <div class="error-message" id="passwordError">Password must be at least 6 alphanumeric characters.</div>
+                </div>
+
+                <button type="submit" class="btn-submit">Register as Seller</button>
+            </form>
+
+            <div class="form-footer">
+                Already have an account? <a href="login.html">Log In</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get elements
+        const form = document.getElementById('sellerRegisterForm');
+        const fields = {
+            name: document.getElementById('name'),
+            address: document.getElementById('address'),
+            phone: document.getElementById('phone'),
+            email: document.getElementById('email'),
+            username: document.getElementById('username'),
+            password: document.getElementById('password')
+        };
+        const errors = {
+            name: document.getElementById('nameError'),
+            address: document.getElementById('addressError'),
+            phone: document.getElementById('phoneError'),
+            email: document.getElementById('emailError'),
+            username: document.getElementById('usernameError'),
+            password: document.getElementById('passwordError')
+        };
+
+        // Validation Rules
+        function validateName() {
+            const regex = /^[A-Za-z ]+$/;
+            const valid = regex.test(fields.name.value.trim());
+            errors.name.style.display = valid ? 'none' : 'block';
+            return valid;
+        }
+
+        function validateAddress() {
+            const regex = /^[A-Za-z0-9 ]+$/;
+            const valid = regex.test(fields.address.value.trim());
+            errors.address.style.display = valid ? 'none' : 'block';
+            return valid;
+        }
+
+        function validatePhone() {
+            const regex = /^1[3-9]\d{9}$/;
+            const valid = regex.test(fields.phone.value.trim());
+            errors.phone.style.display = valid ? 'none' : 'block';
+            return valid;
+        }
+
+        function validateEmail() {
+            const regex = /^[^@]+@[^@]+\.(com|cn)$/;
+            const valid = regex.test(fields.email.value.trim());
+            errors.email.style.display = valid ? 'none' : 'block';
+            return valid;
+        }
+
+        function validateUsername() {
+            const valid = /^[A-Za-z0-9]{6,}$/.test(fields.username.value.trim());
+            errors.username.style.display = valid ? 'none' : 'block';
+            return valid;
+        }
+
+        function validatePassword() {
+            const valid = /^[A-Za-z0-9]{6,}$/.test(fields.password.value.trim());
+            errors.password.style.display = valid ? 'none' : 'block';
+            return valid;
+        }
+
+        // Real-time validation
+        fields.name.addEventListener('input', validateName);
+        fields.address.addEventListener('input', validateAddress);
+        fields.phone.addEventListener('input', validatePhone);
+        fields.email.addEventListener('input', validateEmail);
+        fields.username.addEventListener('input', validateUsername);
+        fields.password.addEventListener('input', validatePassword);
+
+        // Form Submit
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const isValid = [
+                validateName(),
+                validateAddress(),
+                validatePhone(),
+                validateEmail(),
+                validateUsername(),
+                validatePassword()
+            ].every(Boolean);
+
+            if (isValid) {
+                alert('Seller registration submitted successfully!\nYour account will be verified soon.');
+                form.reset();
+            }
+        });
+    </script>
+
+</body>
+
+</html>
