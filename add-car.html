@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Vehicle - Gallop Motors</title>
+    <style>
+         :root {
+            --primary: #1a1a2e;
+            --accent: #c9a96e;
+            --accent-hover: #b8944f;
+            --dark: #0d0d1a;
+            --light: #f5f5f0;
+            --white: #ffffff;
+            --gray: #6b7280;
+            --gray-light: #e5e7eb;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
+            --radius: 12px;
+            --radius-lg: 20px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        /* Navbar */
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 16px 0;
+            background: rgba(13, 13, 26, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .navbar-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            background: var(--accent);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        /* Container */
+        
+        .container {
+            flex: 1;
+            max-width: 800px;
+            margin: 120px auto 60px;
+            padding: 0 20px;
+            width: 100%;
+        }
+        
+        .card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            padding: 40px;
+        }
+        
+        .card-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        
+        .card-header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .card-header p {
+            color: var(--gray);
+        }
+        /* Form */
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary);
+            font-size: 0.95rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--gray-light);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: var(--transition);
+            background: #fafafa;
+            font-family: inherit;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(201, 169, 110, 0.1);
+        }
+        /* Image Upload */
+        
+        .image-upload-wrapper {
+            border: 2px dashed var(--gray-light);
+            border-radius: var(--radius);
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: #fafafa;
+            position: relative;
+        }
+        
+        .image-upload-wrapper:hover {
+            border-color: var(--accent);
+            background: rgba(201, 169, 110, 0.05);
+        }
+        
+        .image-upload-wrapper input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .upload-placeholder i {
+            font-size: 2.5rem;
+            color: var(--gray);
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        #imagePreview {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: var(--radius);
+            display: none;
+            margin-top: 15px;
+        }
+        /* Button */
+        
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-submit:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 169, 110, 0.3);
+        }
+        /* Responsive */
+        
+        @media (max-width: 600px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🏎️</div>
+                Gallop Motors
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="search.html">Search</a></li>
+                <li><a href="add-car.html">Add Car</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1>List Your Vehicle</h1>
+                <p>Enter the details below to add your car to our premium inventory</p>
+            </div>
+
+            <form id="addCarForm">
+                <div class="form-grid">
+                    <!-- b. Model/Type -->
+                    <div class="form-group">
+                        <label for="model">Car Model</label>
+                        <input type="text" id="model" class="form-control" placeholder="e.g. BMW M4" required>
+                    </div>
+
+                    <!-- a. Color -->
+                    <div class="form-group">
+                        <label for="color">Color</label>
+                        <input type="text" id="color" class="form-control" placeholder="e.g. Alpine White" required>
+                    </div>
+
+                    <!-- c. Year -->
+                    <div class="form-group">
+                        <label for="year">Manufacture Year</label>
+                        <select id="year" class="form-control" required>
+                            <option value="" disabled selected>Select Year</option>
+                            <script>
+                                const currentYear = new Date().getFullYear();
+                                for (let y = currentYear + 1; y >= 1990; y--) {
+                                    document.write(`<option value="${y}">${y}</option>`);
+                                }
+                            </script>
+                        </select>
+                    </div>
+
+                    <!-- e. Price -->
+                    <div class="form-group">
+                        <label for="price">Price ($)</label>
+                        <input type="number" id="price" class="form-control" placeholder="e.g. 45000" required>
+                    </div>
+
+                    <!-- d. Location -->
+                    <div class="form-group full-width">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" class="form-control" placeholder="e.g. New York, NY" required>
+                    </div>
+
+                    <!-- f. Vehicle Image -->
+                    <div class="form-group full-width">
+                        <label>Vehicle Image</label>
+                        <div class="image-upload-wrapper">
+                            <input type="file" id="imageInput" accept="image/*" required>
+                            <div class="upload-placeholder" id="uploadPlaceholder">
+                                <i>📸</i>
+                                <p>Click or drag and drop to upload car image</p>
+                                <small>PNG, JPG or JPEG up to 5MB</small>
+                            </div>
+                            <img id="imagePreview" alt="Preview">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <span>🚀</span> List Vehicle Now
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const imageInput = document.getElementById('imageInput');
+        const imagePreview = document.getElementById('imagePreview');
+        const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+        const addCarForm = document.getElementById('addCarForm');
+
+        // Image Preview Logic
+        imageInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                    uploadPlaceholder.style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Form Submission
+        addCarForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Basic data gathering
+            const carData = {
+                id: Date.now(), // Unique ID
+                name: document.getElementById('model').value,
+                brand: document.getElementById('model').value.split(' ')[0], // Simple brand extraction
+                color: document.getElementById('color').value,
+                year: parseInt(document.getElementById('year').value),
+                price: parseFloat(document.getElementById('price').value) / 1000, // Convert to 'k' format for index.html compatibility
+                displayPrice: `$${document.getElementById('price').value}`,
+                location: document.getElementById('location').value,
+                image: imagePreview.src, // Base64 image
+                emoji: '🚗', // Default emoji for added cars
+                type: 'User Listed',
+                badge: 'new',
+                badgeText: 'New'
+            };
+
+            // Save to localStorage
+            const existingCars = JSON.parse(localStorage.getItem('userCars') || '[]');
+            existingCars.push(carData);
+            localStorage.setItem('userCars', JSON.stringify(existingCars));
+
+            console.log('Vehicle data saved to localStorage:', carData);
+
+            alert('Congratulations! Your vehicle has been successfully listed.\nIt will now appear in the inventory.');
+
+            // Reset form and preview
+            addCarForm.reset();
+            imagePreview.style.display = 'none';
+            uploadPlaceholder.style.display = 'block';
+
+            // Optional: Redirect to home to see the result
+            window.location.href = 'index.html';
+        });
+    </script>
+
+</body>
+
+</html>
